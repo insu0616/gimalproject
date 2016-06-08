@@ -1,6 +1,8 @@
 from django.db import models
+from django.core.files import File
+from django.db.models.signals import pre_save
+from blog.utils import square_image, thumbnail
 from django.conf import settings
-
 
 class Category(models.Model):
     category = models.CharField(max_length=200)
@@ -31,6 +33,3 @@ class Review(models.Model):
     photo1 = models.FileField(blank = True, null = True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-
-

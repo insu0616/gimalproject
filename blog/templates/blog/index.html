@@ -3,7 +3,7 @@
 {% block content %}
 <div class="row">
     <div class="container">
-    <a href="{% url 'blog:category_new' %}" class="btn btn-success">카테고리생성</a>
+    총 {{ category_list.count }} 종류의 카테고리가 있습니다.
     {% for category in category_list %}
         <h1>
             <a href="{% url 'blog:category_detail' category.pk %}" class="btn btn-primary">{{ category.category }}</a>
