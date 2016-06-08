@@ -18,8 +18,8 @@ class Shop(models.Model):
     introduction = models.TextField()
     view = models.IntegerField(default=0)
     photo1 = models.FileField()
-    photo2 = models.FileField(default="")
-    photo3 = models.FileField(default="")
+    photo2 = models.FileField(blank = True, null = True)
+    photo3 = models.FileField(blank = True, null = True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -28,7 +28,7 @@ class Review(models.Model):
     shop = models.ForeignKey(Shop)
     commenter = models.ForeignKey(settings.AUTH_USER_MODEL)
     comment = models.TextField()
-    photo1 = models.FileField(default="")
+    photo1 = models.FileField(blank = True, null = True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

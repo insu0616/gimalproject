@@ -5,15 +5,17 @@
     <div class="container">
     <a href="{% url 'blog:category_new' %}" class="btn btn-success">카테고리생성</a>
     {% for category in category_list %}
-        <li>
-            <h1><a href="{% url 'blog:category_detail' category.pk %}">{{ category.category }}</h1>
-            <a href="{% url 'blog:category_edit' category.pk %}">카테고리수정</a>
-            {% for shop in category.shop_set.all %}
+        <h1>
+            <a href="{% url 'blog:category_detail' category.pk %}" class="btn btn-primary">{{ category.category }}</a>
+        </h1>
+        <a href="{% url 'blog:category_edit' category.pk %}" >카테고리수정</a>
+        {% for shop in category.shop_set.all %}
+            <li>
                 <ol>
                     <a href="{% url 'blog:shop_detail' shop.pk %}"><h3>{{ shop.name }}</h3></a> {{ shop.view }}
                 </ol>
-            {% endfor%}
-        </li>
+            </li>
+        {% endfor%}
     {% endfor %}
     </div>
 </div>
