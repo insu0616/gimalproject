@@ -3,9 +3,14 @@
 {% block content %}
 <div class="row">
     <div class="container">
-    {% for shop in shop_list %}
+    {% for category in category_list %}
         <li>
-            <h1><a href="{% url 'blog:detail' shop.pk %}">{{ shop.name }}</a> {{ shop.view }}
+            <h1>{{ category.category }}</h1>
+            {% for shop in category.shop_set.all %}
+                <ol>
+                    <a href="{% url 'blog:detail' shop.pk %}"><h3>{{ shop.name }}</h3></a> {{ shop.view }}
+                </ol>
+            {% endfor%}
         </li>
     {% endfor %}
     </div>

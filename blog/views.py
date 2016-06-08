@@ -3,8 +3,9 @@ from .models import Category, Shop, Review
 
 # Create your views here.
 def index(request):
+    category_list = Category.objects.all()
     shop_list = Shop.objects.all()
-    return render(request, 'blog/index.html', {'shop_list':shop_list})
+    return render(request, 'blog/index.html', {'shop_list':shop_list, 'category_list':category_list})
 
 def detail(request, pk):
     shop_detail = get_object_or_404(Shop, pk=pk)
