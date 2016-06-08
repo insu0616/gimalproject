@@ -61,3 +61,18 @@ def shop_new(request, pk):
     else:
         form = ShopForm()
     return render(request, 'blog/shop_form.html', {'form': form})
+
+def shop_edit(request, category_pk, shop_pk):
+    shop = get_object_or_404(Shop, pk=shop_pk)
+    category = get_object_or_404(Category, pk=category_pk)
+    if request.method == 'POST':
+        form = ShopForm(request.POST, request.FILES, instance=shop)
+        if form.is_valid():
+            shop = form.save(commit=False)
+            shop.category = category
+            shop.save()
+            messages.success(request, '가게가 수정됐습니다.')
+            return redirect(reverse('blog:shop_detail', args=[shop.pk]))
+    else:
+        form = ShopForm(instance=shop)
+    return render(request, 'blog/shop_form.html', {'form': form})
