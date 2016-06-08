@@ -17,6 +17,7 @@
         {{ shop_detail.introduction }}<br><hr/>
         <div>
             <h2>덧글</h2>
+            <a href="{% url 'blog:review_new' shop_detail.pk %}">덧글달기</a>
             {% if shop_detail.review_set.all %}
                 {% for review in shop_detail.review_set.all %}
                     <li>
