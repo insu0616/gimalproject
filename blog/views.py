@@ -93,3 +93,20 @@ def review_new(request, shop_pk):
     else:
         form = ReviewForm()
     return render(request, 'blog/review_form.html', {'form': form})
+
+def review_edit(request, shop_pk, review_pk):
+    shop = get_object_or_404(Shop, pk=shop_pk)
+    review = get_object_or_404(Review, pk=review_pk)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, request.FILES, instance=review)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.shop = shop
+            review.commenter = request.user
+            review.save()
+            messages.success(request, '리뷰가 수정됐습니다.')
+            return redirect(reverse('blog:shop_detail', args=[shop_pk]))
+    else:
+        form = ReviewForm(instance=review)
+    return render(request, 'blog/shop_form.html', {'form': form})
+

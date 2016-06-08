@@ -22,6 +22,7 @@
                 {% for review in shop_detail.review_set.all %}
                     <li>
                         {{ review.commenter }}: {{ review.comment }}
+                          <a href="{% url 'blog:review_edit' shop_detail.pk review.pk %}">수정</a>
                     </li>
                     <img src="{{ review.photo1.url }}"/><hr/>
                 {% endfor %}
