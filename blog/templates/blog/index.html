@@ -7,6 +7,7 @@
     {% for category in category_list %}
         <li>
             <h1>{{ category.category }}</h1>
+            <a href="{% url 'blog:category_edit' category.pk %}">카테고리수정</a>
             {% for shop in category.shop_set.all %}
                 <ol>
                     <a href="{% url 'blog:detail' shop.pk %}"><h3>{{ shop.name }}</h3></a> {{ shop.view }}

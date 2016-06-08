@@ -26,3 +26,16 @@ def category_new(request):
     else:
         form = CategoryForm()
     return render(request, 'blog/category_form.html', {'form': form})
+
+def category_edit(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES, instance=category)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '카테고리가 수정됐습니다.')
+            return redirect(reverse('blog:index'))
+    else:
+        form = CategoryForm(instance=category)
+    return render(request, 'blog/category_form.html', {'form': form})
