@@ -14,11 +14,12 @@ def category_detail(request, pk):
     category_detail = get_object_or_404(Category, pk=pk)
     return render(request, 'blog/category_detail.html', {'category_detail':category_detail})
 
-def detail(request, pk):
+def shop_detail(request, pk):
     shop_detail = get_object_or_404(Shop, pk=pk)
     shop_detail.view += 1
     shop_detail.save()
-    return render(request, 'blog/detail.html', {'shop_detail':shop_detail})
+    return render(request, 'blog/shop_detail.html', {'shop_detail':shop_detail})
+
 
 def category_new(request):
     if request.method == 'POST':
@@ -31,6 +32,7 @@ def category_new(request):
         form = CategoryForm()
     return render(request, 'blog/category_form.html', {'form': form})
 
+
 def category_edit(request, pk):
     category = get_object_or_404(Category, pk=pk)
 
@@ -42,4 +44,16 @@ def category_edit(request, pk):
             return redirect(reverse('blog:index'))
     else:
         form = CategoryForm(instance=category)
+    return render(request, 'blog/category_form.html', {'form': form})
+
+
+def shop_new(request):
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, '새로운 카테고리가 생성됐습니다.')
+            return redirect(reverse('blog:index'))
+    else:
+        form = CategoryForm()
     return render(request, 'blog/category_form.html', {'form': form})
