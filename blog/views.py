@@ -53,6 +53,7 @@ def category_delete(request, pk):
     category.delete()
     return redirect(reverse('blog:index'))
 
+@login_required
 def shop_new(request, pk):
     category = get_object_or_404(Category, pk=pk)
 
@@ -88,7 +89,7 @@ def shop_delete(request, category_pk, shop_pk):
     shop.delete()
     return redirect(reverse('blog:index'))
 
-
+@login_required
 def review_new(request, shop_pk):
     shop = get_object_or_404(Shop, pk=shop_pk)
 
