@@ -47,13 +47,17 @@ def category_edit(request, pk):
     return render(request, 'blog/category_form.html', {'form': form})
 
 
-def shop_new(request):
+def shop_new(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+
     if request.method == 'POST':
-        form = CategoryForm(request.POST, request.FILES)
+        form = ShopForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            messages.success(request, '새로운 카테고리가 생성됐습니다.')
-            return redirect(reverse('blog:index'))
+            shop = form.save(commit=False)
+            shop.category = category
+            shop.save()
+            messages.success(request, '가게가 생성됐습니다.')
+            return redirect(reverse('blog:shop_detail', args=[shop.pk]))
     else:
-        form = CategoryForm()
-    return render(request, 'blog/category_form.html', {'form': form})
+        form = ShopForm()
+    return render(request, 'blog/shop_form.html', {'form': form})
