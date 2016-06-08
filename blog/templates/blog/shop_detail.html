@@ -16,13 +16,13 @@
         {% if shop_detail.photo2 %}
             <img src="{{ shop_detail.photo2.url }}"/><br><hr/>
         {% else %}
-            2번째 이미지는 없네요
+            2번째 이미지는 없네요<br><hr>
         {% endif %}
 
         {% if shop_detail.photo3 %}
             <img src="{{ shop_detail.photo3.url }}"/><br><hr/>
         {% else %}
-            3번째 이미지는 없네요
+            3번째 이미지는 없네요<br><hr>
         {% endif %}
 
         <h2>덧글</h2>
@@ -33,7 +33,9 @@
                     {{ review.commenter }}: {{ review.comment }}
                       <a href="{% url 'blog:review_edit' shop_detail.pk review.pk %}">수정</a>
                 </li>
-                <img src="{{ review.photo1.url }}"/><hr/>
+                {% if review.photo1 %}
+                    <img src="{{ review.photo1.url }}"/><hr/>
+                {% endif %}
             {% endfor %}
         {% else %}
             <h3> 등록된 덧글이 없습니다 </h3>
