@@ -1,0 +1,33 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <div class="row">
+        <a href="{% url 'blog:index' %}">목록으로</a>
+        <h1>{{ shop_detail.name }}</h1>
+        조회수: {{ shop_detail.view }}<br>
+        연락처: {{ shop_detail.number }}<br>
+        주소: {{ shop_detail.address }}<br>
+        생성일: {{ shop_detail.created_at }}<br>
+        수정일: {{ shop_detail.updated_at }}<hr/>
+        <h2>가게사진</h2>
+        <img src="{{ shop_detail.photo1.url }}"/><hr/>
+        <img src="{{ shop_detail.photo2.url }}"/><hr/>
+        <img src="{{ shop_detail.photo3.url }}"/><hr/>
+        {{ shop_detail.introduction }}<br><hr/>
+        <div>
+            <h2>덧글</h2>
+            {% if shop_detail.review_set.all %}
+                {% for review in shop_detail.review_set.all %}
+                    <li>
+                        {{ review.commenter }}: {{ review.comment }}
+                    </li>
+                    <li>
+                        {{ review.photo }}
+                    </li>
+                {% endfor %}
+            {% else %}
+                <h3> 등록된 덧글이 없습니다 </h3>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
