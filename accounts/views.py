@@ -8,7 +8,6 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, '계정이 성공적으로 생성됐습니다.')
             return redirect(settings.LOGIN_URL)
     else:
         form = UserCreationForm()
