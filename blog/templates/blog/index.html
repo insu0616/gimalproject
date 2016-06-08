@@ -9,10 +9,11 @@
             <a href="{% url 'blog:category_detail' category.pk %}" class="btn btn-primary">{{ category.category }}</a>
         </h1>
         <a href="{% url 'blog:category_edit' category.pk %}" >카테고리수정</a>
+        <a href="{% url 'blog:category_delete' category.pk %}" >카테고리삭제</a>
         {% for shop in category.shop_set.all %}
             <li>
                 <ol>
-                    <a href="{% url 'blog:shop_detail' shop.pk %}"><h3>{{ shop.name }}</h3></a> {{ shop.view }}
+                    <a href="{% url 'blog:shop_detail' shop.pk %}">{{ shop.name }}</a> / 조회수: {{ shop.view }}
                 </ol>
             </li>
         {% endfor%}

@@ -4,6 +4,8 @@
 <div class="row">
         <a href="{% url 'blog:index' %}">목록으로</a><br>
         <a href="{% url 'blog:shop_edit' shop_detail.category.pk shop_detail.pk %}">가게수정</a>
+        <a href="{% url 'blog:shop_delete' shop_detail.category.pk shop_detail.pk %}">가게삭제</a>
+
         <h1>{{ shop_detail.name }}</h1>
         조회수: {{ shop_detail.view }}<br>
         연락처: {{ shop_detail.number }}<br>
@@ -32,6 +34,8 @@
                 <li>
                     {{ review.commenter }}: {{ review.comment }}
                       <a href="{% url 'blog:review_edit' shop_detail.pk review.pk %}">수정</a>
+                      <a href="{% url 'blog:review_delete' shop_detail.pk review.pk %}">삭제</a>
+
                 </li>
                 {% if review.photo1 %}
                     <img src="{{ review.photo1.url }}"/><hr/>

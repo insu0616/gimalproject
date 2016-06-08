@@ -11,4 +11,8 @@ urlpatterns = [
     url(r'^category/(?P<pk>\d+)/edit/$', views.category_edit, name='category_edit'),
     url(r'^(?P<shop_pk>\d+)/createreview/$', views.review_new, name='review_new'),
     url(r'^(?P<shop_pk>\d+)/review/(?P<review_pk>\d+)/edit/$', views.review_edit, name='review_edit'),
+    url(r'^category/(?P<pk>\d+)/delete$', views.category_delete, name="category_delete"),
+    url(r'^category/(?P<category_pk>\d+)shop//(?P<shop_pk>\d+)/delete/$', views.shop_delete, name='shop_delete'),
+    url(r'^(?P<shop_pk>\d+)/review/(?P<review_pk>\d+)/delete/$', views.review_delete, name='review_delete'),
+
 ]

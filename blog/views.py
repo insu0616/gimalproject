@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 
+
 # Create your views here.
 def index(request):
     category_list = Category.objects.all()
@@ -46,6 +47,10 @@ def category_edit(request, pk):
         form = CategoryForm(instance=category)
     return render(request, 'blog/category_form.html', {'form': form})
 
+def category_delete(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    category.delete()
+    return redirect(reverse('blog:index'))
 
 def shop_new(request, pk):
     category = get_object_or_404(Category, pk=pk)
@@ -76,6 +81,11 @@ def shop_edit(request, category_pk, shop_pk):
     else:
         form = ShopForm(instance=shop)
     return render(request, 'blog/shop_form.html', {'form': form})
+
+def shop_delete(request, category_pk, shop_pk):
+    shop = get_object_or_404(Shop, pk=shop_pk)
+    shop.delete()
+    return redirect(reverse('blog:index'))
 
 
 def review_new(request, shop_pk):
@@ -109,4 +119,10 @@ def review_edit(request, shop_pk, review_pk):
     else:
         form = ReviewForm(instance=review)
     return render(request, 'blog/shop_form.html', {'form': form})
+
+def review_delete(request, shop_pk, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    review.delete()
+    return redirect(reverse('blog:shop_detail', args=[shop_pk]))
+
 
