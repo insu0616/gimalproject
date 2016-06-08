@@ -4,6 +4,7 @@ from .forms import CategoryForm, ShopForm, ReviewForm
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 
 
 # Create your views here.
@@ -21,7 +22,7 @@ def shop_detail(request, pk):
     shop_detail.save()
     return render(request, 'blog/shop_detail.html', {'shop_detail':shop_detail})
 
-
+@user_passes_test(lambda u: u.is_superuser, login_url='/')
 def category_new(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST, request.FILES)

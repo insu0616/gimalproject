@@ -3,8 +3,8 @@
 {% block content %}
 <div class="row">
         <a href="{% url 'blog:index' %}">목록으로</a><br>
-        <a href="{% url 'blog:shop_edit' shop_detail.category.pk shop_detail.pk %}">가게수정</a>
-        <a href="{% url 'blog:shop_delete' shop_detail.category.pk shop_detail.pk %}">가게삭제</a>
+        <a href="{% url 'blog:shop_edit' shop_detail.category.pk shop_detail.pk %}">가게수정</a><br>
+        <a href="{% url 'blog:shop_delete' shop_detail.category.pk shop_detail.pk %}">가게삭제</a><br>
 
         <h1>{{ shop_detail.name }}</h1>
         조회수: {{ shop_detail.view }}<br>
