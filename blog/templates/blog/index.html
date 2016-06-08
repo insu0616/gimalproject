@@ -3,6 +3,7 @@
 {% block content %}
 <div class="row">
     <div class="container">
+    <a href="{% url 'blog:category_new' %}" class="btn btn-success">카테고리생성</a>
     {% for category in category_list %}
         <li>
             <h1>{{ category.category }}</h1>
