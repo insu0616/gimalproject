@@ -10,6 +10,10 @@ def index(request):
     category_list = Category.objects.all()
     return render(request, 'blog/index.html', {'category_list':category_list})
 
+def category_detail(request, pk):
+    category_detail = get_object_or_404(Category, pk=pk)
+    return render(request, 'blog/category_detail.html', {'category_detail':category_detail})
+
 def detail(request, pk):
     shop_detail = get_object_or_404(Shop, pk=pk)
     shop_detail.view += 1

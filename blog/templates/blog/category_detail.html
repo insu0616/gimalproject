@@ -1,0 +1,9 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+    <div class="row">
+        <a href="{% url 'blog:index' %}">목록으로</a>
+        {% for shop in category_detail.shop_set.all %}
+            <li>{{ shop.name }}</li>
+        {% endfor%}
+{% endblock %}
